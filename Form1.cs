@@ -56,7 +56,8 @@ namespace IISTuner
             cmds.Add("System\\CurrentControlSet\\Services\\HTTP\\Parameters:EnableAggressiveMemoryUsage", 1);//1
             cmds.Add("System\\CurrentControlSet\\Services\\HTTP\\Parameters:EnableCopySend", 1);//1
             cmds.Add("System\\CurrentControlSet\\Services\\TcpIp\\Parameters:TcpTimedWaitDelay", 30);//30
-            cmds.Add("System\\CurrentControlSet\\Services\\HTTP\\Parameters:MaxConnections", 65535);//65535
+            cmds.Add("System\\CurrentControlSet\\Services\\TcpIp\\Parameters:MaxUserPort", 65534);
+            cmds.Add("System\\CurrentControlSet\\Services\\HTTP\\Parameters:MaxConnections", 65534);
 
             if (Loading.Net2Exist)
             {
@@ -77,20 +78,20 @@ namespace IISTuner
         internal void CreateIIS7Pool()
         {
             RunMSDOS(new string[]{
-                Loading.InetDir + "\\appcmd stop apppool PokeIn", 
-            	Loading.InetDir + "\\appcmd add apppool /name:PokeIn /managedPipelineMode:Integrated",
-                Loading.InetDir + "\\appcmd set apppool PokeIn /queueLength:65535",
-                Loading.InetDir + "\\appcmd set config /section:processModel /autoConfig:false /commit:MACHINE",
-                Loading.InetDir + "\\appcmd set apppool PokeIn /autoStart:true",
-                Loading.InetDir + "\\appcmd set apppool PokeIn /enable32BitAppOnWin64:true",
-                Loading.InetDir + "\\appcmd set apppool PokeIn /startMode:AlwaysRunning",
-                Loading.InetDir + "\\appcmd set apppool PokeIn /processModel.shutdownTimeLimit:110",
-                Loading.InetDir + "\\appcmd set config /section:processModel /maxWorkerThreads:100 /commit:MACHINE",
-                Loading.InetDir + "\\appcmd set config /section:processModel /maxIoThreads:100 /commit:MACHINE",
-                Loading.InetDir + "\\appcmd set config /section:processModel /minWorkerThreads:100 /commit:MACHINE",
-                Loading.InetDir + "\\appcmd set config /section:processModel /requestQueueLimit:Infinite /commit:MACHINE",
-                Loading.InetDir + "\\appcmd set config /section:serverRuntime /appConcurrentRequestLimit:65535",
-                Loading.InetDir + "\\appcmd start apppool PokeIn"
+                //Loading.InetDir + "\\appcmd stop apppool PokeIn", 
+            	//Loading.InetDir + "\\appcmd add apppool /name:PokeIn /managedPipelineMode:Integrated",
+                //Loading.InetDir + "\\appcmd set apppool PokeIn /queueLength:65535",
+                //Loading.InetDir + "\\appcmd set config /section:processModel /autoConfig:false /commit:MACHINE",
+                //Loading.InetDir + "\\appcmd set apppool PokeIn /autoStart:true",
+                //Loading.InetDir + "\\appcmd set apppool PokeIn /enable32BitAppOnWin64:true",
+                //Loading.InetDir + "\\appcmd set apppool PokeIn /startMode:AlwaysRunning",
+                //Loading.InetDir + "\\appcmd set apppool PokeIn /processModel.shutdownTimeLimit:110",
+                //Loading.InetDir + "\\appcmd set config /section:processModel /maxWorkerThreads:100 /commit:MACHINE",
+                //Loading.InetDir + "\\appcmd set config /section:processModel /maxIoThreads:100 /commit:MACHINE",
+                //Loading.InetDir + "\\appcmd set config /section:processModel /minWorkerThreads:100 /commit:MACHINE",
+                //Loading.InetDir + "\\appcmd set config /section:processModel /requestQueueLimit:Infinite /commit:MACHINE",
+                Loading.InetDir + "\\appcmd set config /section:serverRuntime /appConcurrentRequestLimit:100000",
+                //Loading.InetDir + "\\appcmd start apppool PokeIn"
             });
         }
 
